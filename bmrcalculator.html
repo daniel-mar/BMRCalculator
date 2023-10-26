@@ -1,0 +1,217 @@
+<html>
+<head>
+<title>BMR Calculator</title>
+
+<script type="text/javascript">
+
+// set variables for later use, shh ignore these
+var totalCalWomen;
+var totalCalMen;
+var wBMR;
+var mBMR;
+var wPercent;
+var mPercent;
+ 
+  function calcCalories() {
+
+	//parse input
+	var weight = parseFloat( document.getElementById("weight").value );
+	var height = parseFloat( document.getElementById("height").value );
+	var age = parseFloat( document.getElementById("age").value ); 
+
+	  // calculate Women BMR
+	  wBMR = 655 + ( 4.3 * weight ) + ( 4.7 * height ) - ( 4.7 * age );
+
+	  // calculate Men BMR
+	  mBMR = 66 + ( 6.3 * weight ) + ( 12.9 * height ) - ( 6.8 * age );
+  
+	    // activity level 1-4 if statements
+		if( document.getElementById("activity").value == "level1" ) {
+      
+		  wPercent = ( 20 / 100 ) * wBMR;
+		  mPercent = ( 20 / 100 ) * mBMR;
+		  totalCalWomen = wBMR + wPercent;	
+		  totalCalMen = mBMR + mPercent;
+		}
+		  
+		  else if( document.getElementById("activity").value == "level2" ) {
+		    
+		    wPercent = ( 37 / 100 ) * wBMR;
+			mPercent = ( 37 / 100 ) * mBMR;
+			totalCalWomen = wBMR + wPercent;
+			totalCalMen = mBMR + mPercent;
+		  }
+			
+		    else if( document.getElementById("activity").value == "level3" ) {
+		  	  
+		      wPercent = ( 55 / 100 ) * wBMR;
+		      mPercent = ( 55 / 100 ) * mBMR;
+		      totalCalWomen = wBMR + wPercent;
+		      totalCalMen = mBMR + mPercent;
+		      }
+		  
+		      else if( document.getElementById("activity").value == "level4" ) {
+				
+			    wPercent = ( 70 / 100 ) * wBMR;
+			    mPercent = ( 70 / 100 ) * mBMR;
+			    totalCalWomen = wBMR + wPercent;
+			    totalCalMen = mBMR + mPercent;  
+				}
+				
+      // construct output
+	      var msg = "<div>To maintain your current weight...</div>";
+		  msg = msg + "<div>If you are female, you must eat " + totalCalWomen.toFixed() + " calories</div>";
+		  msg = msg + "<div>If you are male, you must eat " + totalCalMen.toFixed() + " calories</div></br>"; 
+		  msg = msg + "<div>More calories in a day will result in weight gain,</div>";
+		  msg = msg + "<div>less calories will result in weight loss</div>";
+		  
+    // output
+            document.getElementById("output").innerHTML = msg;
+			
+  // ends function  
+  }
+  
+</script>
+
+<style type="text/css">
+
+body {
+	background: #FF9933;
+	color: black;
+	font-family: comic sans ms;
+}
+
+#pagewrap {
+	border: 6px blue solid;
+	padding: 30px;
+	width: 700px;
+	margin: 20px auto 0px auto;
+	border: 6px #81C6DD solid;
+	border-radius: 25px;
+}
+
+#contentwrap {
+	background: #99CCCC;
+	border: 6px #9E3B33 solid;
+	border-radius: 25px;
+}
+
+#header {
+	margin: 20px 20px 20px 20px; 
+	text-align: center;
+	color: #ffffff;
+	background: #003399;
+	font-weight: bold;
+	font-size: 2em;
+	border-radius: 25px;
+	padding: 10px 0px 10px 0px;
+	
+}
+
+#formwrap {
+	margin: 20px 20px 20px 20px; 
+	height: 450px;
+	background: #CCCCCC;
+	border: 5px solid #9E3B33;
+	border-radius: 25px;
+	padding: 10px;
+	background-image: url("http://newton.ncc.edu/gansonj/ite154/img/broccoli.png");
+	background-repeat: no-repeat;
+	background-position:right center;
+}
+
+.formtext {
+	color: black;
+	margin-top: 8px;
+}
+
+.formfield {
+	padding: 5px;
+	background: #99CCCC;
+	color: black;
+	border: 2px #003399 solid;
+	border-radius: 25px;
+}
+
+#calcbutton {
+	background: #E48743;
+	color: white;
+	cursor: pointer;
+	padding: 5px 0px 5px 0px;
+	border: 3px solid #90CA77;
+	width: 150px;
+}
+
+#calcbutton:hover {
+	background: #90CA77;
+	color: #000000;
+	border: 3px solid #E48743;	
+}
+
+#footer {
+	margin: 20px 20px 20px 20px; 
+	text-align: center;
+	color: white;
+	background: #003399;
+	font-weight: bold;
+	font-size: 1.45em;
+	border-radius: 25px;
+	padding: 20px 0px 20px 0px;
+}
+
+#results {
+	color: #003399;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="pagewrap">
+
+	<div id="contentwrap">
+	
+		<div id="header">
+			Calorie Counter
+		</div>
+	
+		<div id="formwrap">
+	
+			<form>	
+				<div class="formtext">Enter your weight (pounds)</div>
+				<input type="text" class="formfield" id="weight" size="40" value="150" />
+	
+				<div class="formtext">Enter your height (inches)</div>
+				<input type="text" class="formfield" id="height" size="40" value="66" />
+				
+				<div class="formtext">Enter your age (years)</div>
+				<input type="text" class="formfield" id="age" size="40" value="44" />
+		
+				<div class="formtext">Select your activity level (1-4)</div>
+				<select id="activity" class="formfield">
+					<option value="level1">Level 1 - Sedentary - little or no exercise</option>
+					<option value="level2">Level 2 - Lightly Active - exercise 1-3 times/week</option>
+					<option value="level3">Level 3 - Moderately Active - exercise 3-5 times/week</option>
+					<option value="level4">Level 4 - Very Active - exercise 6-7 times/week</option>
+				</select>
+		
+				<div style="margin-top:20px;">
+					<input type="button" value="Calculate Calories" id="calcbutton" onClick="calcCalories()" />
+				</div>
+			</form>	
+
+			<div id="output"></div>
+
+		</div> <!-- ends div#formwrap -->
+	
+		<div id="footer">
+		Thanks for visiting!
+		</div>
+
+	</div> <!-- ends div#contentwrap -->
+
+</div> <!-- ends div#pagerwrap -->
+
+</body>
+</html>
